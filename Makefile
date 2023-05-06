@@ -40,7 +40,7 @@ $(BIN_DIR)/$(EXEC): $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@echo -e "\e[92m==> \e[0;1mCompiling $<…\e[0m"
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 buildtext:
