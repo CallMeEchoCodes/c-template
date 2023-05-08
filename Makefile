@@ -28,7 +28,7 @@ endif
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-all: build install
+all: build
 
 build: buildtext $(BIN_DIR)/$(EXEC) 
 	@if [ "$(RELEASE)" = "1" ]; then echo -e "\e[95m==> \e[0;1mStripping executable $(EXEC)…\e[0m"; strip --strip-unneeded $(BIN_DIR)/$(EXEC); fi
