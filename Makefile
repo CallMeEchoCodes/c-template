@@ -9,10 +9,9 @@ SRCS := $(sort $(shell find $(SRC_DIR) -name '*.c'))
 
 CC = cc
 CFLAGS = -Wall
-CPPFLAGS = 
+CPPFLAGS =
 LDFLAGS =
-
-LDLIBS = 
+LDLIBS =
 
 ifeq ($(origin INSTALL_DIR),undefined)
 	INSTALL_DIR := /usr/local/bin/
@@ -22,11 +21,13 @@ ifeq ($(RELEASE),1)
 	BUILD_DIR := $(BUILD_DIR)/release
 	RELEASE := 1
 	CFLAGS += -O2
+	CPPFLAGS += -DRELEASE=1
 else
 	BUILD_DIR := $(BUILD_DIR)/debug
 	RELEASE := 0
 	CFLAGS += -Og
 	CFLAGS += -g
+	CPPFLAGS += -DDEBUG=1
 endif
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -39,12 +40,12 @@ build: buildtext $(BIN_DIR)/$(EXEC)
 $(BIN_DIR)/$(EXEC): $(OBJS)
 	@printf "\e[93m==> \e[0;1mLinking executable %s…\e[0m\n" "$(EXEC)"
 	@mkdir -p $(BIN_DIR)
-	@$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o "$@"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@printf "\e[92m==> \e[0;1mCompiling %s…\e[0m\n" "$<"
 	@mkdir -p $(dir $@)
-	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o "$@"
 
 buildtext:
 	@printf "\e[1;91m> \e[0;1mBuilding %s…\e[0m\n" "$(EXEC)"
