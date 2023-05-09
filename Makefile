@@ -60,7 +60,7 @@ clean:
 install: build
 	@if [ "$(RELEASE)" != "1" ]; then printf "\e[1;93m> Installing requires you to be in release mode!\e[0m\n"; exit 1; fi
 	@printf "\e[1;93m> \e[0;1mInstalling %s…\e[0m\n" "$(EXEC)"
-	@install -sDpg0 -o0 -m755 $(BIN_DIR)/$(EXEC) "$(INSTALL_DIR)/"
+	@install -Dpm755 $(BIN_DIR)/$(EXEC) "$(INSTALL_DIR)/"
 
 uninstall:
 	@printf "\e[1;93m> \e[0;1mUninstalling %s…\e[0m\n" "$(EXEC)"
