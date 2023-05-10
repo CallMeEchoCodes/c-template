@@ -1,4 +1,5 @@
 EXEC = example
+VERSION = 1.0.0
 
 CC = cc
 CFLAGS = -Wall
@@ -48,12 +49,16 @@ ifeq ($(RELEASE),1)
 	BUILD_DIR := $(BUILD_DIR)/release
 	RELEASE := 1
 	CFLAGS += -O2
+	CPPFLAGS += -DRELEASE
 else
 	BUILD_DIR := $(BUILD_DIR)/debug
 	RELEASE := 0
 	CFLAGS += -Og
 	CFLAGS += -g
+	CPPFLAGS += -DDEBUG
 endif
+
+CPPFLAGS += -DVERSION='"$(VERSION)"'
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_BUILD_DIR)/%.o)
 MAN_BUILT_PAGES := $(MAN_PAGES:$(MAN_DIR)/%.md=$(MAN_BUILD_DIR)/%)
