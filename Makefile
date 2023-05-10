@@ -58,6 +58,7 @@ else
 	CPPFLAGS += -DDEBUG
 endif
 
+CPPFLAGS += -DEXEC='"$(EXEC)"'
 CPPFLAGS += -DVERSION='"$(VERSION)"'
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_BUILD_DIR)/%.o)
